@@ -1,16 +1,16 @@
 <html>
-<head>
-	<meta name="author" content="Haklab Beograd" />
-	<meta name="description" content="" />
-	<meta name="charset" value="utf-8" />
-	<title>Home</title>
-</head>
-<body>
-	<header><h1>List of all families</h1></header>
+    <head>
+        <meta name="author" content="Haklab Beograd" />
+        <meta name="description" content="" />
+        <meta name="charset" value="utf-8" />
+        <title>Home</title>
+    </head>
+    <body>
+        <header><h1>List of all families</h1></header>
 
-	{% for family in families %}
-	<p>{{ family.surname }}</p>
-	{% endfor %}
+        {% for family in families %}
+        <p><a href="{{ family.get_absolute_url }}">{{ family.last_name }}</a></p>
+        {% endfor %}
 
-</body>
+    </body>
 </html>
