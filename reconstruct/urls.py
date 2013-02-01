@@ -4,9 +4,10 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
+
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'reconstruct.views.home', name='home'),
+    url(r'^$', 'reconstruct.tree.views.home', name='home'),
     # url(r'^reconstruct/', include('reconstruct.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
@@ -14,4 +15,5 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^', include('reconstruct.tree.urls')),
 )
