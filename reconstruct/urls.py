@@ -17,3 +17,15 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('reconstruct.tree.urls')),
 )
+
+
+from django.conf import settings
+
+# ... the rest of your URLconf goes here ...
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        url(r'^files/(?P<path>.*)$', 'django.views.static.serve', {
+            'document_root': settings.MEDIA_ROOT,
+        }),
+   )
