@@ -1,3 +1,5 @@
+import os
+
 from django.conf import settings
 from django.db import models
 from sorl.thumbnail.fields import ImageField
@@ -10,6 +12,10 @@ class Country(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+    class Meta:
+        verbose_name_plural = "Countries"
 
 
 
@@ -29,12 +35,20 @@ class Family(models.Model):
         return self.last_name
 
 
+    class Meta:
+        verbose_name_plural = "Families"
+
+
 
 class Pic(models.Model):
     family = models.ForeignKey(Family, related_name="pics", blank=True, null=True)
     decade = models.IntegerField(blank=True, null=True)
-    image = ImageField(upload_to="slike", blank=True, null=True)
+    image = ImageField(upload_to=settings.MEDIA_ROOT)
 
 
     def __unicode__(self):
-        return self.image.url
+        return os.path.basename(self.image.name)
+
+
+    def get_absolute_url(self):
+        return "%s%s" % (settings.MEDIA_URL, self)
