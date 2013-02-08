@@ -1,0 +1,5 @@
+Reconstruct is a Django project that sorts data (images, text and sound) connected to specific families from various countries. It consists of 3 models: Country, Family and Pic. Country and Family are in a Many-to-many relationship, and Pic is in a Foreign key relationship to Family.
+1)The family view has all the content connected to one specific family (images, text, audio), 
+2)the text view shows all the stories of the families, 
+3)the pictures view shows all pictures sorted by decade, 
+4)families can be sorted by country or by last name.
