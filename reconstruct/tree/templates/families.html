@@ -1,13 +1,18 @@
+<!DOCTYPE html>
+
+
 <html>
     <head>
         <meta name="author" content="Haklab Beograd" />
         <meta name="description" content="" />
         <meta name="charset" value="utf-8" />
         <title>Home</title>
+		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     </head>
     <body>
-        <header><h1>List of all families</h1></header>
-
+        <script src="http://code.jquery.com/jquery.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<img src = "{{STATIC_URL}}logo.png"/>
         {% for family in families %}
         <p><a href="{{ family.get_absolute_url }}">{{ family.last_name }}</a></p>
         {% endfor %}

@@ -8,7 +8,10 @@
     <body>
         <header><h1>Family {{ family.last_name }}</h1></header>
         {% for pic in family.pics.all %}
-        <img src={{ pic.get_absolute_url }} width="400" height="300" />
+        <img src={{ pic.get_absolute_url }} />
         {% endfor %}
+		<div style="font-size: 9px"> {{ family.story }}</div>
     </body>
 </html>
+
+
