@@ -6,16 +6,19 @@ from sorl.thumbnail.fields import ImageField
 
 
 
-class Country(models.Model):
-    name = models.CharField(max_length=255)
+
+class Pic(models.Model):
+    decade = models.IntegerField(blank=True, null=True)
+    image = ImageField(upload_to=settings.MEDIA_ROOT)
 
 
     def __unicode__(self):
-        return self.name
+        return os.path.basename(self.image.name)
 
 
-    class Meta:
-        verbose_name_plural = "Countries"
+    def get_absolute_url(self):
+        return "%s%s" % (settings.MEDIA_URL, self)
+
 
 
 
@@ -24,7 +27,7 @@ class Family(models.Model):
     footnote = models.CharField(max_length=255, blank=True, null=True)
     story = models.TextField(blank=True, null=True)
     sound = models.FileField(upload_to="zvuks", blank=True, null=True)
-    countries = models.ManyToManyField(Country, blank=True, null=True)
+    pics = models.ManyToManyField(Pic, blank=True, null=True)
 
 
     def get_absolute_url(self):
@@ -40,15 +43,22 @@ class Family(models.Model):
 
 
 
-class Pic(models.Model):
-    family = models.ForeignKey(Family, related_name="pics", blank=True, null=True)
-    decade = models.IntegerField(blank=True, null=True)
-    image = ImageField(upload_to=settings.MEDIA_ROOT)
 
-
-    def __unicode__(self):
-        return os.path.basename(self.image.name)
+class Country(models.Model):
+    name = models.CharField(max_length=255)
+    family = models.ManyToManyField(Family, blank=True, null=True)
 
 
     def get_absolute_url(self):
-        return "%s%s" % (settings.MEDIA_URL, self)
+        return "/country/%d" % self.id
+
+
+    def __unicode__(self):
+        return self.name
+
+
+    class Meta:
+        verbose_name_plural = "Countries"
+
+
+

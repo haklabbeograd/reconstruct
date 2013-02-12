@@ -19,13 +19,18 @@ def families(request):
 
 
 
+def by_countries(request):
+    countries = Country.objects.all()
+    return render_to_response("by_countries.html", {'countries': countries})
+
+
+
 def show_family(request, family_id):
     family = get_object_or_404(Family, pk=family_id)
-
-    # get_object_or_404 is basicaly this:
-    # try:
-    # 	family = Family.objects.get(pk=family_id)
-    # except Family.DoesNotExist:
-    # 	raise Http404
-
     return render_to_response("family.html", {'family': family})
+
+
+
+def timeline (request):
+    images = Image.objects.all().order_by("decade")
+    return render_to_response("image_list.html", {"image_list": image_list})
